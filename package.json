@@ -1,0 +1,53 @@
+{
+  "name": "vue-manage-system",
+  "version": "5.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "prettier": "prettier --write .",
+    "prepare": "husky install",
+    "commit": "cz"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "element-plus": "1.0.2-beta.52",
+    "node-sass": "^4.14.0",
+    "typescript": "^4.1.6",
+    "vue": "^3.2.26",
+    "vue-cropperjs": "^5.0.0",
+    "vue-i18n": "^9.0.0",
+    "vue-router": "^4.0.10",
+    "vue-schart": "^2.0.0",
+    "vuex": "^4.0.2",
+    "wangeditor": "^4.7.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.2.3",
+    "@vue/compiler-sfc": "^3.2.26",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.0",
+    "prettier": "^2.5.1",
+    "sass": "^1.45.1",
+    "vite": "^2.3.7",
+    "typescript": "~4.1.5",
+    "@typescript-eslint/eslint-plugin": "^4.18.0",
+    "@typescript-eslint/parser": "^4.18.0",
+    "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/eslint-config-typescript": "^7.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
