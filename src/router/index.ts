@@ -1,7 +1,8 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import Home from "../views/Home.vue";
+import type { RouteRecordRaw } from "vue-router" //type表示是类型，不是函数或者其他东西，也可以不写
 
-const routes = [
+import Home from "../views/Home.vue";
+const routes: RouteRecordRaw[]  = [
   {
     path: "/",
     redirect: "/dashboard"

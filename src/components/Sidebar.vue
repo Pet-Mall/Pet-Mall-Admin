@@ -47,7 +47,7 @@
 
 <script setup>
 import { computed, watch } from "vue";
-import { useStore } from "vuex";
+import { useStore } from "@/store/index";
 import { useRoute } from "vue-router";
 const items = [
   {
@@ -131,7 +131,7 @@ const onRoutes = computed(() => {
   return route.path;
 });
 const store = useStore();
-const collapse = computed(() => store.state.collapse);
+const collapse = computed(() => store.collapse);
 </script>
 
 <style scoped>

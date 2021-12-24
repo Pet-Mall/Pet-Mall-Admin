@@ -52,18 +52,17 @@
 </template>
 <script>
 import { computed, onMounted } from "vue";
-import { useStore } from "vuex";
+import { useStore } from "@/store/index";
 import { useRouter } from "vue-router";
 export default {
   setup() {
     const username = localStorage.getItem("ms_username");
     const message = 2;
-
     const store = useStore();
-    const collapse = computed(() => store.state.collapse);
+    const collapse = computed(() => store.collapse);
     // 侧边栏折叠
     const collapseChage = () => {
-      store.commit("handleCollapse", !collapse.value);
+      store.handleCollapse(!collapse.value);
     };
 
     onMounted(() => {

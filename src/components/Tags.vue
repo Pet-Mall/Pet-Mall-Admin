@@ -34,7 +34,7 @@
 
 <script>
 import { computed } from "vue";
-import { useStore } from "vuex";
+import { useStore } from "@/store/index";
 import { onBeforeRouteUpdate, useRoute, useRouter } from "vue-router";
 export default {
   setup() {
@@ -45,13 +45,13 @@ export default {
     };
 
     const store = useStore();
-    const tagsList = computed(() => store.state.tagsList);
+    const tagsList = computed(() => store.tagsList);
     const showTags = computed(() => tagsList.value.length > 0);
 
     // 关闭单个标签
     const closeTags = (index) => {
       const delItem = tagsList.value[index];
-      store.commit("delTagsItem", { index });
+      store.delTagsItem({ index });
       const item = tagsList.value[index]
         ? tagsList.value[index]
         : tagsList.value[index - 1];
@@ -67,15 +67,17 @@ export default {
       const isExist = tagsList.value.some((item) => {
         return item.path === route.fullPath;
       });
+
+
       if (!isExist) {
         if (tagsList.value.length >= 8) {
-          store.commit("delTagsItem", { index: 0 });
+          store.delTagsItem({ index: 0 });
         }
-        store.commit("setTagsItem", {
+        store.setTagsItem({
           name: route.name,
           title: route.meta.title,
           path: route.fullPath
-        });
+        })
       }
     };
     setTags(route);
@@ -85,7 +87,7 @@ export default {
 
     // 关闭全部标签
     const closeAll = () => {
-      store.commit("clearTags");
+      store.clearTags();
       router.push("/");
     };
     // 关闭其他标签
@@ -93,7 +95,7 @@ export default {
       const curItem = tagsList.value.filter((item) => {
         return item.path === route.fullPath;
       });
-      store.commit("closeTagsOther", curItem);
+      store.closeTagsOther(curItem);
     };
     const handleTags = (command) => {
       command === "other" ? closeOther() : closeAll();

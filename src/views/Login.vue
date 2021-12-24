@@ -39,7 +39,7 @@
 
 <script>
 import { ref, reactive } from "vue";
-import { useStore } from "vuex";
+import { useStore } from "@/store/index";
 import { useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
 
@@ -76,7 +76,7 @@ export default {
     };
 
     const store = useStore();
-    store.commit("clearTags");
+    store.clearTags("clearTags");
 
     return {
       param,

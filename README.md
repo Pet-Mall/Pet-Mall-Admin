@@ -1,7 +1,7 @@
 ## 一.技术栈
 
 1. 后台框架：vue-manage-system
-2. 使用vue3+vite+element-plus(后台不使用ts)
+2. 使用vue3+vite+pinia+element-plus(后台不使用ts)
 
 ## 二.代码规范
 
