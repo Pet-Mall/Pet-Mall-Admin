@@ -1,8 +1,12 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import type { RouteRecordRaw } from "vue-router" //type表示是类型，不是函数或者其他东西，也可以不写
 
+const MenuList = () => import("@/views/menuList/index.vue")
+const RoleManagement = () => import("@/views/roleManagement/index.vue")
+const UserList = () => import("@/views/userList/index.vue")
+
 import Home from "../views/Home.vue";
-const routes: RouteRecordRaw[]  = [
+const routes: RouteRecordRaw[] = [
   {
     path: "/",
     redirect: "/dashboard"
@@ -138,6 +142,31 @@ const routes: RouteRecordRaw[]  = [
         },
         component: () =>
           import(/* webpackChunkName: "editor" */ "../views/Editor.vue")
+      },
+      // 权限
+      {
+        path: "/MenuList",
+        name: "MenuList",
+        meta: {
+          title: "菜单列表"
+        },
+        component: MenuList
+      },
+      {
+        path: "/RoleManagement",
+        name: "RoleManagement",
+        meta: {
+          title: "角色管理"
+        },
+        component: RoleManagement
+      },
+      {
+        path: "/UserList",
+        name: "UserList",
+        meta: {
+          title: "用户列表"
+        },
+        component: UserList
       }
     ]
   },
@@ -160,7 +189,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   document.title = `${to.meta.title} | vue-manage-system`;
   const role = localStorage.getItem("ms_username");
-  console.log(role,'role');
+  console.log(role, 'role');
   if (!role && to.path !== "/login") {
     next("/login");
   } else if (to.meta.permission) {

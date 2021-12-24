@@ -28,6 +28,7 @@
     // 路径解析(类似于webpack alias)
     "paths": {
       "@/*": ["src/*"],
+      "public": ["public/*"],
       "components/*": ["src/components/*"]
     },
     // 可以指定在项目中可以使用哪里库的类型(Proxy/Window/Document)

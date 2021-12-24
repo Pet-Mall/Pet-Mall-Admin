@@ -56,6 +56,25 @@ const items = [
     title: "系统首页"
   },
   {
+    icon: "el-icon-lx-calendar",
+    index: "10",
+    title: "权限管理",
+    subs: [
+      {
+        index: "/MenuList",
+        title: "菜单列表"
+      },
+      {
+        index: "/RoleManagement",
+        title: "角色管理"
+      },
+      {
+        index: "/UserList",
+        title: "用户列表"
+      },
+    ]
+  },
+  {
     icon: "el-icon-lx-cascades",
     index: "/table",
     title: "基础表格"
