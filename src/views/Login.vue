@@ -2,36 +2,34 @@
   <div class="login-wrap">
     <div class="ms-login">
       <div class="ms-title">后台管理系统</div>
-      <el-form
-        :model="param"
-        :rules="rules"
-        ref="login"
-        label-width="0px"
-        class="ms-content"
-      >
+      <el-form :model="param"
+               :rules="rules"
+               ref="login"
+               label-width="0px"
+               class="ms-content">
         <el-form-item prop="username">
-          <el-input v-model="param.username" placeholder="username">
+          <el-input v-model="param.account"
+                    placeholder="账号">
             <template #prepend>
               <el-button icon="el-icon-user"></el-button>
             </template>
           </el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input
-            type="password"
-            placeholder="password"
-            v-model="param.password"
-            @keyup.enter="submitForm()"
-          >
+          <el-input type="password"
+                    placeholder="密码"
+                    v-model="param.password"
+                    @keyup.enter="submitForm()">
             <template #prepend>
               <el-button icon="el-icon-lock"></el-button>
             </template>
           </el-input>
         </el-form-item>
         <div class="login-btn">
-          <el-button type="primary" @click="submitForm()">登录</el-button>
+          <el-button type="primary"
+                     @click="submitForm()">登录</el-button>
         </div>
-        <p class="login-tips">Tips : 用户名和密码随便填。</p>
+        <!-- <p class="login-tips">Tips : 用户名和密码随便填。</p> -->
       </el-form>
     </div>
   </div>
@@ -42,17 +40,18 @@ import { ref, reactive } from "vue";
 import { useStore } from "@/store/index";
 import { useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
-
+import Config from '@/settings'
 export default {
-  setup() {
+  setup () {
     const router = useRouter();
-    const param = reactive({
-      username: "admin",
-      password: "123123"
+    const store = useStore();
+    store.clearTags("clearTags");
+    const param = ref({
+      account: "1084491297@qq.com",
+      password: "1084491297@qq.com"
     });
-
     const rules = {
-      username: [
+      account: [
         {
           required: true,
           message: "请输入用户名",
@@ -64,19 +63,21 @@ export default {
     const login = ref(null);
     const submitForm = () => {
       login.value.validate((valid) => {
-        if (valid) {
-          ElMessage.success("登录成功");
-          localStorage.setItem("ms_username", param.username);
-          router.push("/");
-        } else {
-          ElMessage.error("登录成功");
+        if (valid)
+        {
+          store.Login(Config.isAmdin, param.value).then((res) => {
+            ElMessage.success("登录成功");
+            router.push("/");
+          }).catch(() => {
+             throw erroe("错误")
+          })
+        } else
+        {
+          ElMessage.warning("请输入密码");
           return false;
         }
       });
     };
-
-    const store = useStore();
-    store.clearTags("clearTags");
 
     return {
       param,

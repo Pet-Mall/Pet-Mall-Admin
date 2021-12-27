@@ -1,48 +1,49 @@
 <template>
   <div class="header">
     <!-- 折叠按钮 -->
-    <div class="collapse-btn" @click="collapseChage">
-      <i v-if="!collapse" class="el-icon-s-fold"></i>
-      <i v-else class="el-icon-s-unfold"></i>
+    <div class="collapse-btn"
+         @click="collapseChage">
+      <i v-if="!collapse"
+         class="el-icon-s-fold"></i>
+      <i v-else
+         class="el-icon-s-unfold"></i>
     </div>
     <div class="logo">后台管理系统</div>
     <div class="header-right">
       <div class="header-user-con">
         <!-- 消息中心 -->
         <div class="btn-bell">
-          <el-tooltip
-            effect="dark"
-            :content="message ? `有${message}条未读消息` : `消息中心`"
-            placement="bottom"
-          >
+          <el-tooltip effect="dark"
+                      :content="message ? `有${message}条未读消息` : `消息中心`"
+                      placement="bottom">
             <router-link to="/tabs">
               <i class="el-icon-bell"></i>
             </router-link>
           </el-tooltip>
-          <span class="btn-bell-badge" v-if="message"></span>
+          <span class="btn-bell-badge"
+                v-if="message"></span>
         </div>
         <!-- 用户头像 -->
         <div class="user-avator">
           <img src="../assets/img/img.jpg" />
         </div>
         <!-- 用户名下拉菜单 -->
-        <el-dropdown class="user-name" trigger="click" @command="handleCommand">
+        <el-dropdown class="user-name"
+                     trigger="click"
+                     @command="handleCommand">
           <span class="el-dropdown-link">
             {{ username }}
             <i class="el-icon-caret-bottom"></i>
           </span>
           <template #dropdown>
             <el-dropdown-menu>
-              <a
-                href="https://github.com/lin-xin/vue-manage-system"
-                target="_blank"
-              >
+              <a href="https://github.com/lin-xin/vue-manage-system"
+                 target="_blank">
                 <el-dropdown-item>项目仓库</el-dropdown-item>
               </a>
               <el-dropdown-item command="user">个人中心</el-dropdown-item>
-              <el-dropdown-item divided command="loginout"
-                >退出登录</el-dropdown-item
-              >
+              <el-dropdown-item divided
+                                command="loginout">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
@@ -54,8 +55,11 @@
 import { computed, onMounted } from "vue";
 import { useStore } from "@/store/index";
 import { useRouter } from "vue-router";
+import Cookies from 'js-cookie'
+
+
 export default {
-  setup() {
+  setup () {
     const username = localStorage.getItem("ms_username");
     const message = 2;
     const store = useStore();
@@ -66,7 +70,8 @@ export default {
     };
 
     onMounted(() => {
-      if (document.body.clientWidth < 1500) {
+      if (document.body.clientWidth < 1500)
+      {
         collapseChage();
       }
     });
@@ -74,14 +79,15 @@ export default {
     // 用户名下拉菜单选择事件
     const router = useRouter();
     const handleCommand = (command) => {
-      if (command == "loginout") {
-        localStorage.removeItem("ms_username");
+      if (command == "loginout")
+      {
+        store.loout()
         router.push("/login");
-      } else if (command == "user") {
+      } else if (command == "user")
+      {
         router.push("/user");
       }
     };
-
     return {
       username,
       message,
